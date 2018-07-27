@@ -11,13 +11,13 @@ function (req, res) {
 });
 router.post("/api/signup",
 (req, res, next) => {
-    passport.authenticate('local-signup', function(err, user, info) {
+    passport.authenticate('local-signup', (err, user, info) => {
         if (err) {
-          return res.status("500").json(err); // will generate a 500 error
+          return res.status("500").send({success: false, message: "ERROR: " + err}); // will generate a 500 error
         }
         // Generate a JSON response reflecting authentication status
         if (! user) {
-          return res.send({ success : false, message : 'authentication failed' });
+          return res.status("401").send({ success : false, message : 'authentication failed' });
         }
         // ***********************************************************************
         // "Note that when using a custom callback, it becomes the application's
