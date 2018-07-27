@@ -9,12 +9,12 @@ router.post("/api/login", passport.authenticate('local-signin', { failureRedirec
 function (req, res) {
     res.status("200").send();
 });
-router.post("/api/signup",
+router.post("/api/signup", passport.authenticate('local-signup', {failureRedirect: '/api/autherror'}),
 (req, res, next) => {
-    passport.authenticate('local-signup', (err, user, info) => {
-        if (err) {
-          return res.status("500").send({success: false, message: "ERROR: " + err}); // will generate a 500 error
-        }
+    // passport.authenticate('local-signup', (err, user, info) => {
+    //     if (err) {
+    //       return res.status("500").send({success: false, message: "ERROR: " + err}); // will generate a 500 error
+    //     }
         // Generate a JSON response reflecting authentication status
         // if (! user) {
         //   return res.status("401").send({ success : false, message : 'authentication failed' });
@@ -31,7 +31,7 @@ router.post("/api/signup",
         //   }
         //   return res.send({ success : true, message : 'authentication succeeded' });
         // });      
-      })(req, res, next);
+    //   })(req, res, next);
 });
 router.get("/api/autherror", (
     req, res) => {
