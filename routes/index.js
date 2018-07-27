@@ -5,8 +5,10 @@ const db = require("../models");
 
 
 module.exports = router;
-
-router.post("/api/login", passport.authenticate('local-signin', { failureRedirect: '/api/autherror' }),
+router.get("/", (req, res)=>{
+    res.send("Yo");
+})
+router.post("/api/login", passport.authenticate('local-signin', { successRedirect: "/", failureRedirect: '/api/autherror' }),
 function (req, res) {
     res.status("200").send();
 });
