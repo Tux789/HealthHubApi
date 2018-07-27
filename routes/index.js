@@ -1,7 +1,7 @@
 const passport = require("../controllers/authController");
 const express = require("express");
 const router = express.Router();
-const db = require("./models");
+const db = require("../models");
 
 
 module.exports = router;
