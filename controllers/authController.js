@@ -83,7 +83,7 @@ function createNewUser(username, password, cb) {
 // serializing, and querying the user record by ID from the database when
 // deserializing.
 passport.serializeUser(function (user, cb) {
-    cb(null, user._id);
+    cb(null, user.id);
 });
 
 passport.deserializeUser(function (id, cb) {
