@@ -17,7 +17,7 @@ passport.use('local-signin', new Strategy({
     passwordField : 'password',
     passReqToCallback : true // allows us to pass back the entire request to the callback
   },
-    function (email, password, cb) {
+    (email, password, cb) => {
         db.User.findOne({ email: email })
             .then((user) => {
                 console.log("user: " + user);
