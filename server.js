@@ -28,9 +28,10 @@ app.use(passport.session()); // persistent login sessions
 
 // Add routes, both API and view
 app.use(routes);
-
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/healthhubdb";
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/healthhubdb");
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 // Start the API server
 app.listen(PORT, function() {
