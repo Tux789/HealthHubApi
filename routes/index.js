@@ -10,14 +10,14 @@ function (req, res) {
     res.status("200").send();
 });
 router.post("/api/signup", (req, res) => {
-        db.User.findOne({email: req.params.email})
+        db.User.findOne({email: req.body.email})
         .then((user) => {
             if(!user)
             {
                 db.User.create({
-                    username: req.params.username,
-                    email: req.params.email,
-                    password: passport.generateHash(req.params.password)
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: passport.generateHash(req.body.password)
                 })
                 .then((newUser) => newUser)
                 .catch((err) => res.status("500").json(err))
