@@ -32,7 +32,7 @@ passport.use('local-signin', new Strategy({
                 else
                 return cb(null, user);
             }).catch((err) => {
-                return cb(err);
+                return err;
             })
     }));
 passport.use('local-signup', new Strategy({
