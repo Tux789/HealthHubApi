@@ -9,31 +9,32 @@ router.post("/api/login", passport.authenticate('local-signin', { failureRedirec
 function (req, res) {
     res.status("200").send();
 });
-router.post("/api/signup", passport.authenticate('local-signup', {failureRedirect: '/api/autherror'}),
-(req, res) => {
-    // passport.authenticate('local-signup', (err, user, info) => {
-    //     if (err) {
-    //       return res.status("500").send({success: false, message: "ERROR: " + err}); // will generate a 500 error
-    //     }
-        // Generate a JSON response reflecting authentication status
-        // if (! user) {
-        //   return res.status("401").send({ success : false, message : 'authentication failed' });
-        // }
-        // ***********************************************************************
-        // "Note that when using a custom callback, it becomes the application's
-        // responsibility to establish a session (by calling req.login()) and send
-        // a response."
-        // Source: http://passportjs.org/docs
-        // ***********************************************************************
-        // req.login(user, loginErr => {
-        //   if (loginErr) {
-        //     return next(loginErr);
-        //   }
-        //   return res.send({ success : true, message : 'authentication succeeded' });
-        // });      
-    //   })(req, res, next);
-    res.send();
-});
+router.post("/api/signup", (req, res) => {
+        db.User.findOne({email: req.params.email})
+        .then((user) => {
+            if(!user)
+            {
+                const hashedPassword = generateHash(password);
+                const data = {
+                    username: username,
+                    email: email,
+                    password: hashedPassword,
+                };
+                db.User.create({
+                    username: req.params.username,
+                    email: req.params.email,
+                    password: passport.generateHash(req.params.password)
+                })
+                .then((newUser) => newUser)
+                .catch((err) => res.status("500").send(err))
+            }else{
+                console.log("User Already Exists");
+                res.status("401").send("User Already Exists");
+            }
+        })
+        .catch((err)=>cb(err));
+    });
+
 router.get("/api/autherror", (
     req, res) => {
         res.status("401").send();

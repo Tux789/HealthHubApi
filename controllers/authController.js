@@ -66,7 +66,7 @@ db.User.findOne({email: email})
 function createNewUser(username, password, cb) {
     db.User.create({
         username: username,
-        password: generateHash(password),
+        password: passport.generateHash(password),
     }).then(function (user) {
         console.log(user);
         return cb(null, user);
@@ -93,10 +93,13 @@ passport.deserializeUser(function (id, cb) {
     });
 });
 
-const generateHash = function(password) {
+passport.generateHash = function(password) {
     return bCrypt.hashSync(password, bCrypt.genSaltSync(process.env.HASH_VALUE || 8), null);
 };
 const isValidPassword = function(userpass,password){
     return bCrypt.compareSync(password, userpass);
   }
+
+
+
 module.exports = passport;
