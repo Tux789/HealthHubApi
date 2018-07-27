@@ -14,12 +14,6 @@ router.post("/api/signup", (req, res) => {
         .then((user) => {
             if(!user)
             {
-                const hashedPassword = generateHash(password);
-                const data = {
-                    username: username,
-                    email: email,
-                    password: hashedPassword,
-                };
                 db.User.create({
                     username: req.params.username,
                     email: req.params.email,
