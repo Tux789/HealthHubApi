@@ -26,7 +26,7 @@ router.post("/api/signup", (req, res) => {
                     password: passport.generateHash(req.params.password)
                 })
                 .then((newUser) => newUser)
-                .catch((err) => res.status("500").send(err))
+                .catch((err) => res.status("500").json(err))
             }else{
                 console.log("User Already Exists");
                 res.status("401").send("User Already Exists");
