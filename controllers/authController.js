@@ -23,16 +23,16 @@ passport.use('local-signin', new Strategy({
                 console.log("user: " + user);
                 if (!user) {
                     console.log("User not found");
-                   return cb(null,false);
+                   return cb(null,false,{message: "User Not Found"});
                     }
                 else if (!isValidPassword(user.password,password)) {
                     console.log("Invalid Password");
-                     return cb(null, false); 
+                     return cb(null, false, {message: "Invalid Password"}); 
                     }
                 else
                 return cb(null, user);
             }).catch((err) => {
-                return err;
+                return cb(err);
             })
     }));
 passport.use('local-signup', new Strategy({
