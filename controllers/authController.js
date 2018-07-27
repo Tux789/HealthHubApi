@@ -59,6 +59,7 @@ db.User.findOne({email: email})
             return cb(null, false);
         }
     })
+    .catch((err)=>cb(err,false));
 }));
 
 
