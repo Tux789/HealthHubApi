@@ -26,7 +26,7 @@ router.post("/api/signup", (req, res) => {
                 res.status("401").send("User Already Exists");
             }
         })
-        .catch((err)=>cb(err));
+        .catch((err)=>res.send("500").json(err));
     });
 
 router.get("/api/autherror", (
