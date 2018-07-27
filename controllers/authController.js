@@ -52,7 +52,8 @@ db.User.findOne({email: email})
                 password: hashedPassword,
             };
             db.User.create(data)
-            .then((newUser) => cb(null,newUser));
+            .then((newUser) => cb(null,newUser))
+            .catch((err) => cb(err, false));
         }else{
             console.log("User Already Exists");
             return cb(null, false);

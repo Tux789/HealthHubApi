@@ -17,3 +17,9 @@ router.get("/api/autherror", (
     req, res) => {
         res.status("401").send();
     });
+    router.get("/api/testRoute", (req, res) =>{
+        res.status("200").json({text:"yo"});
+    });
+    router.post("/api/testRoute", (req, res) =>{
+        res.status("200").json({text:"yo"});
+    });
