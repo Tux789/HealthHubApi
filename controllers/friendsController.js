@@ -14,7 +14,7 @@ addFriends: (req, res) => {
     .then((dbUser) => {
         if (dbUser.friends.indexOf(req.params.friendId)===-1){
             db.User.findOneAndUpdate(
-                {_id: req.user.id}, 
+                {_id: mongoose.ObjectId(req.user.id)}, 
                 {$push: {friends: req.params.friendId}},
                 {new: true,  upsert:true})
             .then((results)=>{
@@ -24,7 +24,7 @@ addFriends: (req, res) => {
                 {$push: {friends: req.user.id}},
             {new: true, upsert:true})
             .then((results2) => {
-                res.json(results);
+                res.json(results2);
             })
             })
         }else{
