@@ -10,14 +10,29 @@ getFriends: (req, res) => {
     .catch((err) => res.status("500").send(err));
 },
 addFriends: (req, res) => {
-    db.User.findOneAndUpdate(
-        {_id: req.user.id}, 
-        {$push: {friends: req.params.friendId}},
-        {new: true, upsert:true})
-    .then((results)=>{
-        console.log(results);
-        res.json(results);
+    db.User.findById(req.user.id)
+    .then((dbUser) => {
+        if (dbUser.friends.indexOf(req.params.friendId)===-1){
+            db.User.findOneAndUpdate(
+                {_id: req.user.id}, 
+                {$push: {friends: req.params.friendId}},
+                {new: true,  upsert:true})
+            .then((results)=>{
+                console.log(results);
+                db.findOneAndUpdate(
+                    {_id: req.params.friendId},
+                {$push: {friends: req.user.id}},
+            {new: true, upsert:true})
+            .then((results2) => {
+                res.json(results);
+            })
+            })
+        }else{
+            res.status("304").send();
+        }
     })
+    .catch((err) => res.status("500").send());
+       
 },
 }
 module.exports = fc;
