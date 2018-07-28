@@ -1,6 +1,7 @@
 const db = require('../models');
 
 getFriends = (req, res) =>{
+    console.log(req.user);
    db.User.findById(req.user.id)
     .then((dbUser) =>{
        res.json(dbUser.friends);
