@@ -45,7 +45,7 @@ router.get("/api/autherror", (
         res.status("200").json({text:"yo"});
     });
     router.get("/api/friends", isLoggedIn, (req, res) => {
-       fc.getFriends(req.user.id)
+       fc.getFriends(req, res);
     })
 
     function isLoggedIn(req, res, next) {
