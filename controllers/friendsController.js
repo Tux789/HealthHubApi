@@ -31,7 +31,7 @@ addFriends: (req, res) => {
             res.status("304").send();
         }
     })
-    .catch((err) => res.status("500").send());
+    .catch((err) => res.status("500").send(err));
        
 },
 }
