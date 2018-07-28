@@ -14,8 +14,9 @@ const fc = {
         db.User.findById(req.user.id)
             .then((dbUser) => {
                 if (dbUser.friends.indexOf(req.params.friendId) === -1) {
+                    console.log("Friend not found");
                     db.User.findOneAndUpdate(
-                        { _id: mongoose.ObjectId(req.user.id) },
+                        { _id: req.user.id},
                         { $push: { friends: req.params.friendId } },
                         { new: true, upsert: true })
                         .then((results) => {
