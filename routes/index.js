@@ -1,4 +1,6 @@
 const passport = require("../controllers/authController");
+const fc = require("../controllers/friendsController");
+const ac = require("../controllers/activitiesController")
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
@@ -42,3 +44,14 @@ router.get("/api/autherror", (
     router.post("/api/testRoute", (req, res) =>{
         res.status("200").json({text:"yo"});
     });
+    router.get("/api/friends", isLoggedIn, (req, res) => {
+       fc.getFriends(req.user.id)
+    })
+
+    function isLoggedIn(req, res, next) {
+        if (req.isAuthenticated()){
+            return next()
+        }else{
+            res.redirect('/signin');
+        }        
+    }
