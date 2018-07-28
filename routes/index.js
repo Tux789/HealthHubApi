@@ -47,6 +47,9 @@ router.get("/api/autherror", (
     router.get("/api/friends", isLoggedIn, (req, res) => {
        fc.getFriends(req, res);
     })
+    router.post("/api/friends/:friendId",isLoggedIn, (req, res) =>{
+        fc.addFriends(req,res);
+    })
 
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()){
