@@ -1,5 +1,5 @@
 const db = require('../models');
-const moongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const fc = {
     getFriends: (req, res) => {
