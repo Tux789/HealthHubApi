@@ -1,7 +1,7 @@
 const db = require('../models');
 
 exports.default = {
-getFriends = (req, res) =>{
+getFriends = function(req, res){
     console.log(req.user);
    db.User.findById(req.user.id)
     .then((dbUser) =>{
