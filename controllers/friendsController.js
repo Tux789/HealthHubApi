@@ -21,7 +21,7 @@ const fc = {
                         { new: true, upsert: true })
                         .then((results) => {
                             console.log(results);
-                            db.findOneAndUpdate(
+                            db.User.findOneAndUpdate(
                                 { _id: req.params.friendId },
                                 { $push: { friends: req.user.id } },
                                 { new: true, upsert: true })
