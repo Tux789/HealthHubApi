@@ -29,6 +29,10 @@ const fc = {
                                     res.json(results2);
                                 })
                         })
+                        .catch((err) => {
+                            console.log(err);
+                            res.status("500").send();
+                        })
                 } else {
                     res.status("304").send();
                 }
