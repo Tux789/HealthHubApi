@@ -25,13 +25,19 @@ router.post("/api/signup", (req, res) => {
                     password: passport.generateHash(req.body.password)
                 })
                 .then((newUser) => res.json(newUser))
-                .catch((err) => res.status("500").json(err))
+                .catch((err) => {
+                    console.log("Error in Create Account " + err)
+                    res.status("500").json(err)
+                })                
             }else{
                 console.log("User Already Exists");
                 res.status("401").send("User Already Exists");
             }
         })
-        .catch((err)=>res.send("500").json(err));
+        .catch((err)=>{
+            console.log("Error in Create Account " + err);    
+            res.send("500").json(err)
+        });
     });
 
 router.get("/api/autherror", (
@@ -47,7 +53,7 @@ router.get("/api/autherror", (
     router.get("/api/friends", isLoggedIn, (req, res) => {
        fc.getFriends(req, res);
     })
-    router.post("/api/friends/:friendId",isLoggedIn, (req, res) =>{
+    router.put("/api/friends/:friendId",isLoggedIn, (req, res) =>{
         fc.addFriends(req,res);
     })
 
