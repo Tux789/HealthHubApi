@@ -39,7 +39,7 @@ router.post("/api/signup", (req, res) => {
         });
 });
 
-router.get("/api/isAuth", isLoggedOn, (
+router.get("/api/isAuth", isLoggedIn, (
     req, res) => {
     res.status("200").send();
 });
@@ -51,6 +51,9 @@ router.post("/api/testRoute", (req, res) => {
 });
 router.get("/api/friends", isLoggedIn, (req, res) => {
     fc.getFriends(req, res);
+})
+router.get("/api/friends/:friendId", isLoggedIn, (req,res) => {
+    ac.getActivitiesForUser(req, res, req.params.friendId);
 })
 router.put("/api/friends/:friendId", isLoggedIn, (req, res) => {
     fc.addFriends(req, res);
@@ -66,6 +69,9 @@ router.post("/api/activities", isLoggedIn, (req, res) => {
 })
 router.put("/api/activities/:id", isLoggedIn, (req, res) => {
     ac.addComment(req, res);
+})
+router.get("/api/activities/feed", isLoggedIn, (req,res) =>{
+    ac.getActivitiesFeed(req, res);
 })
 
 

@@ -8,6 +8,10 @@ const ActionsSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    postDate: {
+        type: Date,
+        default: Date.now
+    },
 
     goalType: { type: String, required: true },
     goalEnum: ['TRACK SMOKING', 'TRACK EXERCISE', 'TRACK SLEEP', 'TRACK WEIGHT','IMPROVE SOCIAL INTERACTIONS'],
