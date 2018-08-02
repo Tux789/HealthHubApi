@@ -37,7 +37,7 @@ const ac = {
                 }
             })
             .catch((err) => {
-                console.log("ERROR in getActivitiesFor User " + err);
+                console.log("ERROR in getActivitiesForUser " + err);
                 res.status("500").send(err);
             })
     },
