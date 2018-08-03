@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const ac = {
     getActivities: (req, res) => {
         console.log(req.user);
-        db.Acitvities.find({ _userId: req.user.id })
+        db.Activities.find({ _userId: req.user.id })
             .then((dbActivities) => {
                 res.json(dbActivities);
             })
@@ -55,27 +55,30 @@ const ac = {
         //check to make sure target (req.params.id) is in current user's (req.user) friends list
         db.User.findById(req.user.id)
             .then((dbUser) => {
-                //target is in friends list, execute logic
-                if (dbUser.friends.indexOf(req.params.id) !== -1) {
-                    db.Activities.findOneAndUpdate({ _id: req.params.id },
-                        {
-                            $push: {
-                                _userId: req.user.id,
-                                comment: req.body.comment
-                            }
-                        },
-                        { new: true, upsert: true })
-                        .then((results) => res.json(results))
-                        .catch((err) => {
-                            console.log(err);
-                            res.status("500").send(err);
-                        })
-                }
-                //if activity's owner is NOT in current user's friends list return 401 (Unauthorized) 
-                else {
-                    console.log("ERROR: friend not in friends list");
-                    res.status("401").send("ERROR: friend not in friends list");
-                }
+                db.Activities.findById(req.params.id)
+                    .then((dbActivity) => {
+                        //target is in friends list, execute logic
+                        if (dbUser.friends.indexOf(dbActivity._userId) !== -1 || dbUser._id === dbActivity._userId) {
+                            db.Activities.findOneAndUpdate({ _id: req.params.id },
+                                {
+                                    $push: {
+                                        _userId: req.user.id,
+                                        comment: req.body.comment
+                                    }
+                                },
+                                { new: true, upsert: true })
+                                .then((results) => res.json(results))
+                                .catch((err) => {
+                                    console.log(err);
+                                    res.status("500").send(err);
+                                })
+                        }
+                        //if activity's owner is NOT in current user's friends list return 401 (Unauthorized) 
+                        else {
+                            console.log("ERROR: friend not in friends list");
+                            res.status("401").send("ERROR: friend not in friends list");
+                        }
+                    })
             })
             .catch((err) => {
                 console.log("ERROR: in addComment " + err);
