@@ -20,7 +20,7 @@ const ac = {
                 //if in friends list then get activities
                 if (dbUser.friends.indexOf(userId) !== -1) {
                     console.log(userId);
-                    db.Acitvities.find({ _userId: userId }, { sort: { date: -1 }, limit: 5 })
+                    db.Activities.find({ _userId: userId }, { sort: { date: -1 }, limit: 5 })
                         .then((dbActivities) => {
                             res.json(dbActivities);
                         })
@@ -42,7 +42,7 @@ const ac = {
             })
     },
     addActivity: (req, res) => {
-        db.Acitvities.create(req.body)
+        db.Activities.create(req.body)
             .then((results) => {
                 res.json(results);
             })
@@ -87,7 +87,7 @@ const ac = {
             .then((dbUser) => {
                 const feed = [];
                 dbUser.friends.map((friend) =>
-                    db.Acitvities.find({ _userId: friend }, null, { sort: { date: -1 }, limit: 5 })
+                    db.Activities.find({ _userId: friend }, null, { sort: { date: -1 }, limit: 5 })
                         .then((dbActivities) => {
                             feed.push(dbActivities);
                         }));
