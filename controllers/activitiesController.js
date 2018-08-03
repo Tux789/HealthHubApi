@@ -42,7 +42,7 @@ const ac = {
             })
     },
     addActivity: (req, res) => {
-        req.body[_userId] = req.user.id;
+        req.body._userId = req.user.id;
         console.log(req.body);
         db.Activities.create(req.body)
             .then((results) => {
