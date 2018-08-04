@@ -13,8 +13,11 @@ const ActionsSchema = new Schema({
         default: Date.now
     },
 
-    goalType: { type: String, required: true },
-    goalEnum: ['TRACK SMOKING', 'TRACK EXERCISE', 'TRACK SLEEP', 'TRACK WEIGHT','IMPROVE SOCIAL INTERACTIONS'],
+    goalType: { 
+        type: String, 
+        required: true,
+        enum: ['TRACK SMOKING', 'TRACK EXERCISE', 'TRACK SLEEP', 'TRACK WEIGHT','IMPROVE SOCIAL INTERACTIONS']
+    },
     // smokingMethod: { type: String, required: true }, 
     // smokingEnum: ['CIGARETTE', 'CIGAR', 'E-CIGARETTE', 'PIPE'],
    currentSmokes: { type: Number},
