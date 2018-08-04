@@ -36,8 +36,7 @@ const ac = {
                         .catch((err) => {
                             console.log(err);
                             res.status("500").send(err)
-                        }
-                        );
+                        });
                 }
                 //if target is NOT in currrent user's friends list send 401 (Unauthorized)
                 else {
