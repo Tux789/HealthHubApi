@@ -1,6 +1,6 @@
 const db = require('../models');
 const mongoose = require("mongoose");
-const cc = require("chartController");
+const cc = require("./chartController");
 
 const ac = {
     getActivities: (req, res) => {
