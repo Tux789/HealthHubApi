@@ -1,12 +1,17 @@
 const db = require('../models');
 const mongoose = require("mongoose");
+const cc = require("chartController");
 
 const ac = {
     getActivities: (req, res) => {
         console.log(req.user);
         db.Activities.find({ _userId: req.user.id })
             .then((dbActivities) => {
-                res.json(dbActivities);
+                cc.getChartData(userId, dbActivities.goalType)
+                    .then((chartData) => {
+                        dbActivities.chartData = chartData;
+                        res.json(dbActivities);
+                    })
             })
             .catch((err) => {
                 console.log(err);
@@ -22,7 +27,11 @@ const ac = {
                     console.log(userId);
                     db.Activities.find({ _userId: userId }).sort({ date: -1 }).limit(5)
                         .then((dbActivities) => {
-                            res.json(dbActivities);
+                            cc.getChartData(userId, dbActivities.goalType)
+                                .then((chartData) => {
+                                    dbActivities.chartData = chartData;
+                                    res.json(dbActivities);
+                                })
                         })
                         .catch((err) => {
                             console.log(err);
@@ -94,7 +103,11 @@ const ac = {
                 dbUser.friends.map((friend) =>
                     db.Activities.find({ _userId: friend }).sort({ date: -1 }).limit(5)
                         .then((dbActivities) => {
-                            feed.push(dbActivities);
+                            cc.getChartData(userId, dbActivities.goalType)
+                                .then((chartData) => {
+                                    dbActivities.chartData = chartData;
+                                    feed.push(dbActivities);
+                                })
                         }));
                 feed.sort((a, b) => { return b.postDate - a.postDate })
                 res.json(feed);
