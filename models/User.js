@@ -27,7 +27,7 @@ const UserSchema = new Schema({
 
     friends: [],
 
-    goals: [],
+    goals: { type: Array, },
 });
 
 // This creates our model from the above schema, using mongoose's model method
