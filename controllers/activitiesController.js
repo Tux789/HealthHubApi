@@ -7,7 +7,7 @@ const ac = {
         console.log(req.user);
         db.Activities.find({ _userId: req.user.id })
             .then((dbActivities) => {
-                cc.getChartData(userId, dbActivities.goalType)
+                cc.getChartData(req.user.id, dbActivities.goalType)
                     .then((chartData) => {
                         dbActivities.chartData = chartData;
                         res.json(dbActivities);
