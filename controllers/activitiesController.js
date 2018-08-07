@@ -25,7 +25,7 @@ const ac = {
                 //if in friends list then get activities
                 if (dbUser.friends.indexOf(userId) !== -1) {
                     console.log(userId);
-                    db.Activities.find({ _userId: userId }).sort({ date: -1 }).limit(5)
+                    db.Activities.find({ _userId: userId }).sort({ postDate: -1 }).limit(5)
                         .then((dbActivities) => {
                             cc.getChartData(userId, dbActivities.goalType)
                                 .then((chartData) => {
@@ -68,7 +68,8 @@ const ac = {
                 db.Activities.findById(req.params.id)
                     .then((dbActivity) => {
                         //target is in friends list, execute logic
-                        if (dbUser.friends.indexOf(dbActivity._userId) !== -1 || req.user.id === dbActivity._userId) {
+                        if (dbUser.friends.indexOf(dbActivity._userId) !== -1 || 
+                        req.user.id === dbActivity._userId) {
                             db.Activities.findOneAndUpdate({ _id: req.params.id },
                                 {
                                     $push: {
@@ -100,7 +101,7 @@ const ac = {
             .then((dbUser) => {
                 const feed = [];
                 dbUser.friends.map((friend) =>
-                    db.Activities.find({ _userId: friend }).sort({ date: -1 }).limit(5)
+                    db.Activities.find({ _userId: friend }).sort({ postDate: -1 }).limit(5)
                         .then((dbActivities) => {
                             cc.getChartData(userId, dbActivities.goalType)
                                 .then((chartData) => {

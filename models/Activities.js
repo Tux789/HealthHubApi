@@ -26,7 +26,7 @@ const ActionsSchema = new Schema({
     // howManyPipesSmokedPerDay: { type: Number, required: true },
     exerciseEnum: ['HIGH INTENSITY', 'MEDIUM INTENSITY', 'LOW INTENSITY'],
     currentExerciseMinutes: {type: Number},
-    currenSleepHours: {type: Number},
+    currentSleepHours: {type: Number},
     currentWeight: {type: Number},
     currentSocialOutings: {type: Number},
     //currentSocialHours: {type: Number, required: true },
