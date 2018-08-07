@@ -7,16 +7,26 @@ const ac = {
         console.log(req.user);
         db.Activities.find({ _userId: req.user.id })
             .then((dbActivities) => {
+                if(dbActivities){
                 cc.getChartData(req.user.id, dbActivities.goalType)
                     .then((chartData) => {
                         dbActivities.chartData = chartData;
                         res.json(dbActivities);
                     })
+                    .catch((err) =>{
+                        console.log("ERROR: Error in getActivities() " + err);
+                        res.status("500").send(err);                        
+                    })
+                }else{
+                    dbActivities.chartData = [];
+                    res.json(dbActivities);
+                }
             })
             .catch((err) => {
                 console.log(err);
                 res.status("500").send(err)
             });
+        
     },
     getActivitiesForUser: (req, res, userId) => {
         //check to see if target(userId) is in current user's(req.user) friends list
