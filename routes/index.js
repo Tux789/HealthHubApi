@@ -64,6 +64,9 @@ router.put("/api/friends", isLoggedIn, (req, res) => {
 router.get("/api/activities", isLoggedIn, (req, res) =>{
     ac.getActivities(req,res);
 })
+router.get("/api/activities/:id",isLoggedIn, (req,res) => {
+    ac.getActivitiesForUser(req, res, req.params.id);
+})
 router.post("/api/activities", isLoggedIn, (req, res) => {
     ac.addActivity(req, res);
 })
