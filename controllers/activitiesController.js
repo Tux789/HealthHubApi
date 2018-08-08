@@ -122,19 +122,19 @@ const ac = {
                 let actUpdate;
                 switch (results.goalType) {
                     case "TRACK SMOKING":
-                        actUpdate = db.User.findByIdAndUpdate(req.user.id, { $push: { smokeData: currentSmokes } })
+                        actUpdate = db.User.findByIdAndUpdate(req.user.id, { $push: { smokeData: results.currentSmokes } })
                         break;
                     case "TRACK EXERCISE":
-                        actUpdate = db.User.findByIdAndUpdate(req.user.id, { $push: { exerciseData: currentExerciseMinutes } })
+                        actUpdate = db.User.findByIdAndUpdate(req.user.id, { $push: { exerciseData: results.currentExerciseMinutes } })
                         break;
                     case "TRACK SLEEP":
-                        actUpdate = db.User.findByIdAndUpdate(req.user.id, { $push: { sleepData: currentSleepHours } })
+                        actUpdate = db.User.findByIdAndUpdate(req.user.id, { $push: { sleepData: results.currentSleepHours } })
                         break;
                     case "TRACK WEIGHT":
-                        actUpdate = db.User.findByIdAndUpdate(req.user.id, { $push: { weightData: currentWeight } })
+                        actUpdate = db.User.findByIdAndUpdate(req.user.id, { $push: { weightData: results.currentWeight } })
                         break;
                     case "IMPROVE SOCIAL INTERACTIONS":
-                        actUpdate = db.User.findByIdAndUpdate(req.user.id, { $push: { socialData: currentSocialOutings } })
+                        actUpdate = db.User.findByIdAndUpdate(req.user.id, { $push: { socialData: results.currentSocialOutings } })
                         break;
                     default:
                         throw new Error("Not a valid activity type")
