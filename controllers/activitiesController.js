@@ -17,7 +17,7 @@ const ac = {
         //         console.log(err);
         //         res.status("500").send(err)
         //     });
-        this.getActivitiesWithChart(req.user.id, req.user.id)
+        ac.getActivitiesWithChart(req.user.id, req.user.id)
             .then((results) => {
                 res.json(results);
             })
