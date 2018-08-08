@@ -33,6 +33,12 @@ const cc = {
                     reject(err);
                 });
         })
+    },
+    getChartDataForActivity(userId){
+        activityArray.map((activity) => {
+
+        })
     }
+
 }
 module.exports = cc;

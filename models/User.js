@@ -22,12 +22,18 @@ const UserSchema = new Schema({
     email: {
         type: String,
         required: true,
-        index: {unique: true},
+        index: { unique: true },
     },
 
     friends: [],
 
     goals: { type: Array, },
+    smokeData: Array,
+    exerciseData: Array,
+    sleepData: Array,
+    weightData: Array,
+    socialData: Array
+
 });
 
 // This creates our model from the above schema, using mongoose's model method
