@@ -141,8 +141,9 @@ const ac = {
                         break;
 
                 }
-                actUpdate.then((ccResults))
-                res.json(ccResults);
+                actUpdate.then((ccResults)=>
+                res.json(ccResults)
+            )
             })
             .catch((err) => {
                 console.log(err);
