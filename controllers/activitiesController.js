@@ -17,7 +17,7 @@ const ac = {
         //         console.log(err);
         //         res.status("500").send(err)
         //     });
-        getActivitiesWithChart(req.user.id, req.user.id)
+        this.getActivitiesWithChart(req.user.id, req.user.id)
             .then((results) => {
                 res.json(results);
             })
@@ -99,7 +99,7 @@ const ac = {
         //         console.log("ERROR in getActivitiesForUser " + err);
         //         res.status("500").send(err);
         //     })
-        getActivitiesWithChart(userId, req.user.id)
+        this.getActivitiesWithChart(userId, req.user.id)
             .then((results) => {
                 res.json(results);
             })
@@ -204,7 +204,7 @@ const ac = {
                     //         console.log("Error in Get Feed: " + err);
                     //         res.status("500").send(err);
                     //     });
-                    getActivitiesWithChart(friend, req.user.id)
+                    this.getActivitiesWithChart(friend, req.user.id)
                         .then((activities) => {
                             feed.push(activities);
                         }))
