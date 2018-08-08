@@ -99,7 +99,7 @@ const ac = {
         //         console.log("ERROR in getActivitiesForUser " + err);
         //         res.status("500").send(err);
         //     })
-        this.getActivitiesWithChart(userId, req.user.id)
+        ac.getActivitiesWithChart(userId, req.user.id)
             .then((results) => {
                 res.json(results);
             })
