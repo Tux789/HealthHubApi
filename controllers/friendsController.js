@@ -47,8 +47,11 @@ const fc = {
     addFriendsByEmail: (req, res) => {
         db.User.find({email: req.body.email})
         .then((dbFriend) => {
+            console.log("Friend Found: " + dbFriend);
+
             db.User.findById(req.user.id)
             .then((dbUser) => {
+                console.log("Current User: " + dbUser);
                 if (dbUser.friends.indexOf(dbFriend._id) === -1) {
                     console.log("Friend not found");
                     db.User.findOneAndUpdate(
