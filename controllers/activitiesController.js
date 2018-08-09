@@ -45,9 +45,9 @@ const ac = {
                             .then((dbActivities) => {
                                 let tempArray = [];
                                 let dataArr = []
-                                let tempAct = {};
+                                let returnObj = {};
                                 dbActivities.map((activity) => {
-                                    tempAct = activity;
+                                    returnObj.activity = activity;
                                     switch (activity.goalType) {
                                         case "TRACK SMOKING":
                                             dataArr = dbUser.smokeData;
@@ -65,13 +65,13 @@ const ac = {
                                             dataArr = dbUser.socialData;
                                             break;
                                     }
-                                    tempAct.chartData = {
+                                    returnObj.chartData = {
                                         datasets:[{
                                             data: dataArr
                                         }]
                                     };
-                                    console.log("CHART DATA: " + JSON.stringify(activity.chartData));
-                                    tempArray.push(tempAct);
+                                    //console.log("CHART DATA: " + JSON.stringify(activity.chartData));
+                                    tempArray.push(returnObj);
                                     console.log("TEMPARRAY: " + JSON.stringify(tempArray))
                                 })
                                 resolve(tempArray);
