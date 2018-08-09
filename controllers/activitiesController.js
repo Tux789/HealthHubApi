@@ -70,6 +70,7 @@ const ac = {
                                     };
                                     console.log("CHART DATA: " + JSON.stringify(activity.chartData));
                                     tempArray.push(activity);
+                                    console.log("TEMPARRAY: " + JSON.stringify(tempArray))
                                 })
                                 resolve(tempArray);
                             })
