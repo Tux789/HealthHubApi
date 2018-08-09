@@ -46,7 +46,7 @@ const fc = {
 
     },
     addFriendsByEmail: (req, res) => {
-        db.User.find({email: req.body.email})
+        db.User.findOne({email: req.body.email})
         .then((dbFriend) => {
             console.log("Friend Found: " + dbFriend);
 
