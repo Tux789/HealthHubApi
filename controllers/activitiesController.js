@@ -68,6 +68,7 @@ const ac = {
                                             data: dataArr
                                         }]
                                     };
+                                    console.log("CHART DATA: " + activity.chartData);
                                     tempArray.push(activity);
                                 })
                                 resolve(tempArray);
