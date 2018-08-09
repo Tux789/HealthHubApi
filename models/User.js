@@ -25,7 +25,10 @@ const UserSchema = new Schema({
         index: { unique: true },
     },
 
-    friends: [],
+    friends: [{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }],
 
     goals: { type: Array, },
     smokeData: Array,

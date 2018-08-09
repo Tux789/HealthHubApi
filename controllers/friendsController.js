@@ -5,6 +5,7 @@ const fc = {
     getFriends: (req, res) => {
         console.log(req.user);
         db.User.findById(req.user.id)
+        .populate("")
             .then((dbUser) => {
                 res.json(dbUser.friends);
             })
