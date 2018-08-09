@@ -34,26 +34,40 @@ const ac = {
                 .then((dbUser) => {
                     if (userId === currentUserId || dbUser.friends.indexOf(currentUserId) !== -1) {
                         db.Activities.find({ _userId: userId }).sort({ postDate: -1 })
+                            .populate({
+                                path: "comments",
+                                populate: {
+                                    path: "_userId",
+                                    model: "User",
+                                    select: "username email"
+                                }
+                            })
                             .then((dbActivities) => {
                                 let tempArray = [];
+                                let dataArr = []
                                 dbActivities.map((activity) => {
                                     switch (activity.goalType) {
                                         case "TRACK SMOKING":
-                                            activity.chartData = dbUser.smokeData;
+                                            dataArr = dbUser.smokeData;
                                             break;
                                         case "TRACK EXERCISE":
-                                            activity.chartData = dbUser.exerciseData;
+                                            dataArr = dbUser.exerciseData;
                                             break;
                                         case "TRACK SLEEP":
-                                            activity.chartData = dbUser.sleepData;
+                                            dataArr = dbUser.sleepData;
                                             break;
                                         case "TRACK WEIGHT":
-                                            activity.chartData = dbUser.weightData;
+                                            dataArr = dbUser.weightData;
                                             break;
                                         case "IMPROVE SOCIAL INTERACTIONS":
-                                            activity.chartData = dbUser.socialData;
+                                            dataArr = dbUser.socialData;
                                             break;
                                     }
+                                    activity.chartData = {
+                                        datasets:[{
+                                            data: dataArr
+                                        }]
+                                    };
                                     tempArray.push(activity);
                                 })
                                 resolve(tempArray);
@@ -141,9 +155,9 @@ const ac = {
                         break;
 
                 }
-                actUpdate.then((ccResults)=>
-                res.json(ccResults)
-            )
+                actUpdate.then((ccResults) =>
+                    res.json(ccResults)
+                )
             })
             .catch((err) => {
                 console.log(err);
