@@ -171,8 +171,8 @@ const ac = {
                 db.Activities.findById(req.params.id)
                     .then((dbActivity) => {
                         //target is in friends list, execute logic
-                        if (dbUser.friends.indexOf(dbActivity._userId) !== -1 ||
-                            req.user.id === dbActivity._userId) {
+                        if (req.user.id === dbActivity._userId || dbUser.friends.indexOf(dbActivity._userId) !== -1 )
+                             {
                             db.Activities.findOneAndUpdate({ _id: req.params.id },
                                 {
                                     $push: {
