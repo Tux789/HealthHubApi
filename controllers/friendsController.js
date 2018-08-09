@@ -5,7 +5,7 @@ const fc = {
     getFriends: (req, res) => {
         console.log(req.user);
         db.User.findById(req.user.id)
-        .populate("")
+        .populate("friends")
             .then((dbUser) => {
                 res.json(dbUser.friends);
             })
@@ -56,7 +56,7 @@ const fc = {
                 if (dbUser.friends.indexOf(dbFriend.id) === -1) {
                     console.log("Friend not found");
                     console.log(dbFriend);
-                    console.log(dbFriend.id);
+                    console.log(dbFriend._id);
                     db.User.findByIdAndUpdate(
                         req.user.id,
                         { $push: { friends: dbFriend.id } },
