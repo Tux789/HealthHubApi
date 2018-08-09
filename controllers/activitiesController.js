@@ -68,7 +68,7 @@ const ac = {
                                             data: dataArr
                                         }]
                                     };
-                                    console.log("CHART DATA: " + activity.chartData);
+                                    console.log("CHART DATA: " + JSON.stringify(activity.chartData));
                                     tempArray.push(activity);
                                 })
                                 resolve(tempArray);
