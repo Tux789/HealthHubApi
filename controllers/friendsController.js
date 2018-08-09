@@ -54,6 +54,7 @@ const fc = {
                 console.log("Current User: " + dbUser);
                 if (dbUser.friends.indexOf(dbFriend.id) === -1) {
                     console.log("Friend not found");
+                    console.log(dbFriend);
                     db.User.findByIdAndUpdate(
                         req.user.id,
                         { $push: { friends: dbFriend.id } },
