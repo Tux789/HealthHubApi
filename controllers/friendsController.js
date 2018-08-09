@@ -52,16 +52,16 @@ const fc = {
             db.User.findById(req.user.id)
             .then((dbUser) => {
                 console.log("Current User: " + dbUser);
-                if (dbUser.friends.indexOf(dbFriend._id) === -1) {
+                if (dbUser.friends.indexOf(dbFriend.id) === -1) {
                     console.log("Friend not found");
-                    db.User.findOneAndUpdate(
-                        { _id: req.user.id },
-                        { $push: { friends: dbFriend._id } },
+                    db.User.findByIdAndUpdate(
+                        req.user.id,
+                        { $push: { friends: dbFriend.id } },
                         { new: true, upsert: true })
                         .then((results) => {
                             console.log(results);
-                            db.User.findOneAndUpdate(
-                                { _id: dbFriend._id },
+                            db.User.findByIdAndUpdate(
+                                dbFriend.id,
                                 { $push: { friends: req.user.id } },
                                 { new: true, upsert: true })
                                 .then((results2) => {
