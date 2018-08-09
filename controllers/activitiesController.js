@@ -45,8 +45,9 @@ const ac = {
                             .then((dbActivities) => {
                                 let tempArray = [];
                                 let dataArr = []
-                                let returnObj = {};
+                                
                                 dbActivities.map((activity) => {
+                                    let returnObj = {};
                                     returnObj.activity = activity;
                                     switch (activity.goalType) {
                                         case "TRACK SMOKING":
