@@ -57,13 +57,13 @@ const fc = {
                     db.User.findByIdAndUpdate(
                         req.user.id,
                         { $push: { friends: dbFriend.id } },
-                        { new: true, upsert: true })
+                        { new: true})
                         .then((results) => {
                             console.log(results);
                             db.User.findByIdAndUpdate(
                                 dbFriend.id,
                                 { $push: { friends: req.user.id } },
-                                { new: true, upsert: true })
+                                { new: true})
                                 .then((results2) => {
                                     console.log(results2);
                                     res.json(results2);
