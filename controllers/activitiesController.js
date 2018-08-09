@@ -202,6 +202,7 @@ const ac = {
     getActivitiesFeed: (req, res) => {
         db.User.findById(req.user.id)
             .then((dbUser) => {
+                console.log(dbUser);
                 const feed = [];
                 dbUser.friends.map((friend) =>
                     //             db.Activities.find({ _userId: friend }).sort({ postDate: -1 }).limit(5)
